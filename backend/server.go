@@ -1,5 +1,4 @@
 package main
-
 import (
 	"context"
 	"encoding/json"
@@ -16,11 +15,195 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+/*
+I want to create a functionality such that :
+
+1. a user can upload questions and create a game lobby, to search for any players who want to play a 1v1 quiz with them.
+2. any other users can search for available lobbies (which are created by players of the previous point). if they click "want to join" and no one else has asked to join prior, the lobby will be marked as active, and wont be available for other players to join. 
+3. Once the game lobby is active, the questions uploaded by the first user is used to play a flashcard based game. In this game, both users are shown the same question in real time. the first user to click the correct answer gets 10 points. If they choose wrong, the other user gets 10 points. 
+4. Once all questions are over, that user with most questions is declared the winner. The winner gets 30 points bonus. Then, the scores are added to the respective users' backend database, at the multiPlayerScore parameter. 
+5. Both users leave the game lobby. It closes.
+6. If both users are inactive for over a minute for a question, the lobby is ended, and no points are changed in database. 
+Modify the code and give all necessary changes to implement this.
+*/
+
+type GameLobby struct {
+	ID            string    `json:"id"`
+	Host          string    `json:"host"`
+	Opponent      string    `json:"opponent"`
+	Questions     []Question `json:"questions"`
+	Active        bool      `json:"active"`
+	HostScore     int       `json:"hostScore"`
+	OpponentScore int       `json:"opponentScore"`
+	CreatedAt     time.Time `json:"createdAt"`
+}
+
+type Question struct {
+	Question string   `json:"question"`
+	Options  []string `json:"options"`
+	Answer   string   `json:"answer"`
+}
+
+var lobbies = make(map[string]*GameLobby)
+var lobbyMutex sync.Mutex
+
+func (s *Server) createLobbyHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var lobby GameLobby
+	if err := json.NewDecoder(r.Body).Decode(&lobby); err != nil {
+		http.Error(w, "Invalid request payload", http.StatusBadRequest)
+		return
+	}
+
+	lobby.ID = fmt.Sprintf("%d", time.Now().UnixNano())
+	lobby.CreatedAt = time.Now()
+	lobby.Active = false
+
+	lobbyMutex.Lock()
+	lobbies[lobby.ID] = &lobby
+	lobbyMutex.Unlock()
+
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(lobby)
+}
+
+func (s *Server) listLobbiesHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "GET" {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	lobbyMutex.Lock()
+	defer lobbyMutex.Unlock()
+
+	var availableLobbies []GameLobby
+	for _, lobby := range lobbies {
+		if !lobby.Active {
+			availableLobbies = append(availableLobbies, *lobby)
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(availableLobbies)
+}
+
+func (s *Server) joinLobbyHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var requestData struct {
+		LobbyID  string `json:"lobbyId"`
+		Username string `json:"username"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&requestData); err != nil {
+		http.Error(w, "Invalid request payload", http.StatusBadRequest)
+		return
+	}
+
+	lobbyMutex.Lock()
+	defer lobbyMutex.Unlock()
+
+	lobby, exists := lobbies[requestData.LobbyID]
+	if !exists || lobby.Active {
+		http.Error(w, "Lobby not available", http.StatusNotFound)
+		return
+	}
+
+	lobby.Opponent = requestData.Username
+	lobby.Active = true
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(lobby)
+}
+
+func (s *Server) answerQuestionHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != "POST" {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	var requestData struct {
+		LobbyID  string `json:"lobbyId"`
+		Username string `json:"username"`
+		Answer   string `json:"answer"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&requestData); err != nil {
+		http.Error(w, "Invalid request payload", http.StatusBadRequest)
+		return
+	}
+
+	lobbyMutex.Lock()
+	defer lobbyMutex.Unlock()
+
+	lobby, exists := lobbies[requestData.LobbyID]
+	if !exists || !lobby.Active {
+		http.Error(w, "Lobby not active", http.StatusNotFound)
+		return
+	}
+
+	if len(lobby.Questions) == 0 {
+		http.Error(w, "No questions available", http.StatusBadRequest)
+		return
+	}
+
+	currentQuestion := lobby.Questions[0]
+	if requestData.Answer == currentQuestion.Answer {
+		if requestData.Username == lobby.Host {
+			lobby.HostScore += 10
+		} else if requestData.Username == lobby.Opponent {
+			lobby.OpponentScore += 10
+		}
+	} else {
+		if requestData.Username == lobby.Host {
+			lobby.OpponentScore += 10
+		} else if requestData.Username == lobby.Opponent {
+			lobby.HostScore += 10
+		}
+	}
+
+	lobby.Questions = lobby.Questions[1:]
+
+	if len(lobby.Questions) == 0 {
+		if lobby.HostScore > lobby.OpponentScore {
+			lobby.HostScore += 30
+		} else if lobby.OpponentScore > lobby.HostScore {
+			lobby.OpponentScore += 30
+		}
+		lobby.Active = false
+	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(lobby)
+}
+
+func (s *Server) Run() {
+	http.HandleFunc("/user/login", s.corsMiddleware(s.userLoginHandler))
+	http.HandleFunc("/users", s.corsMiddleware(s.usersHandler))
+	http.HandleFunc("/user/", s.corsMiddleware(s.userHandler))
+	http.HandleFunc("/lobby/create", s.corsMiddleware(s.createLobbyHandler))
+	http.HandleFunc("/lobbies", s.corsMiddleware(s.listLobbiesHandler))
+	http.HandleFunc("/lobby/join", s.corsMiddleware(s.joinLobbyHandler))
+	http.HandleFunc("/lobby/answer", s.corsMiddleware(s.answerQuestionHandler))
+
+	fmt.Println("Server running at", s.serverAddress)
+	log.Fatal(http.ListenAndServe(s.serverAddress, nil))
+}
+
+
 // Define types for the User and UserRequest structures
 type CompletedLevel struct {
 	LevelID int `json:"levelId"`
 	Score   int `json:"score"`
 }
+
 
 type ProfileImage struct {
 	Format string `json:"format"`
@@ -104,14 +287,14 @@ func (s *Server) ConnectMongoDB() error {
 }
 
 // Start the server
-func (s *Server) Run() {
-	http.HandleFunc("/user/login", s.corsMiddleware(s.userLoginHandler))
-	http.HandleFunc("/users", s.corsMiddleware(s.usersHandler))
-	http.HandleFunc("/user/", s.corsMiddleware(s.userHandler))
+// func (s *Server) Run() {
+// 	http.HandleFunc("/user/login", s.corsMiddleware(s.userLoginHandler))
+// 	http.HandleFunc("/users", s.corsMiddleware(s.usersHandler))
+// 	http.HandleFunc("/user/", s.corsMiddleware(s.userHandler))
 
-	fmt.Println("Server running at", s.serverAddress)
-	log.Fatal(http.ListenAndServe(s.serverAddress, nil))
-}
+// 	fmt.Println("Server running at", s.serverAddress)
+// 	log.Fatal(http.ListenAndServe(s.serverAddress, nil))
+// }
 
 // CORS middleware
 func (s *Server) corsMiddleware(next http.HandlerFunc) http.HandlerFunc {
