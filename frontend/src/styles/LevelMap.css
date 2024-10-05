@@ -1,0 +1,92 @@
+.level-map-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 85%;
+}
+
+.level-map {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch; /* Ensures children take the full height of the parent */
+  width: 100%;
+  padding: 15px;
+  padding-left: 5px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.level-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  background-color: #06d6a0;
+  color: white;
+  font-family: "Happy Monkey", system-ui;
+  font-weight: 400;
+  font-size: 1.5rem;
+  border-radius: 25px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Remove fixed height */
+}
+
+.level-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 30%;
+}
+
+.level {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-size: 90%;
+  background-position: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  margin: 10px;
+  overflow: hidden;
+}
+
+.level-connector {
+  width: 270px;
+  height: 10px;
+  background-color: #06d6a0;
+  margin: 0;
+}
+
+.level.unlocked:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.level.locked {
+  filter: grayscale(100%);
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .level-map {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .level-container {
+    flex: 1 0 100%;
+  }
+
+  .level-connector {
+    width: 6px;
+    height: 100px;
+    margin: 10px 0;
+  }
+
+  .level-text {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}

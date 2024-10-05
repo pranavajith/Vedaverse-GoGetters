@@ -1,0 +1,149 @@
+.question-slider {
+  max-width: 600px;
+  margin: 6% auto;
+  text-align: center;
+  perspective: 1000px; /* For 3D flipping effect */
+}
+
+.flashcard {
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+  transform-style: preserve-3d; /* Enables 3D transformation */
+  transition: transform 0.8s; /* Smooth flipping animation */
+  border-radius: 10px;
+  background-color: #333;
+  color: #f0f0f0;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+}
+
+.flashcard.flipped {
+  transform: rotateY(180deg); /* Flip the card */
+}
+
+.flashcard-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Hide the face when flipped */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.flashcard-front {
+  font-size: 20px;
+  white-space: pre-wrap;
+}
+
+.flashcard-back {
+  transform: rotateY(180deg); /* Back face rotated 180 degrees */
+  background-color: #444;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.option-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  background-color: #444;
+  color: #f0f0f0;
+  cursor: pointer;
+  border: none;
+}
+
+/* .options {
+  height: 300px;
+} */
+
+.back-option-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  background-color: #328928;
+  color: #f0f0f0;
+  cursor: pointer;
+  border: none;
+}
+
+.option-button:hover {
+  background-color: #555;
+}
+
+.next-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.feedback {
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Centering the congratulations message */
+.completion-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 100vh;  */
+  text-align: center;
+  flex-direction: column; /* Ensure content stacks vertically */
+  background-color: #323232;
+  padding: 40px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  color: #4caf50; /* Professional green color for success */
+  font-family: "Arial", sans-serif;
+  max-width: 500px;
+  margin: 10% auto;
+}
+
+.completion-message h2 {
+  margin-bottom: 20px;
+  font-size: 36px; /* Larger font for heading */
+  font-weight: bold;
+  /* padding-left: 20px; Adjust this value to move the heading to the right */
+}
+
+
+.completion-message p {
+  font-size: 18px; /* Slightly smaller font for the paragraph */
+  color: #ccc;
+  margin: 0;
+}
+
+.question-slider h2 {
+  margin-bottom: 20px;
+}
+
+.question-slider p {
+  margin-bottom: 30px;
+}
+
+.red-text {
+  color: rgb(255, 88, 88);
+}
+
+.question-slider-container {
+  width: 100%;
+  height: 70vh;
+}
