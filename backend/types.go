@@ -89,6 +89,6 @@ type Server struct {
 	serverAddress     string
 	mongoClient       *mongo.Client
 	usersCollection   *mongo.Collection
-	lobbiesCollection *mongo.Collection // New collection for lobbies
+	lobbiesCollection *mongo.Collection
 	mutex             sync.Mutex
 }

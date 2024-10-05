@@ -48,7 +48,7 @@ func (s *Server) Run() {
 	http.HandleFunc("/user/login", s.corsMiddleware(s.userLoginHandler))
 	http.HandleFunc("/users", s.corsMiddleware(s.usersHandler))
 	http.HandleFunc("/user/", s.corsMiddleware(s.userHandler))
-	http.HandleFunc("/game", s.corsMiddleware(s.gameHandler))
+	// http.HandleFunc("/game", s.corsMiddleware(s.gameHandler))
 	http.HandleFunc("/lobby", s.corsMiddleware(s.lobbyHandler))
 
 	fmt.Println("Server running at", s.serverAddress)
