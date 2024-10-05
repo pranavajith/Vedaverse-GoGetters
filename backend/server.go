@@ -14,6 +14,7 @@ import (
     "go.mongodb.org/mongo-driver/mongo"
     "go.mongodb.org/mongo-driver/mongo/options"
     "golang.org/x/crypto/bcrypt"
+    "github.com/gorilla/websocket"
 )
 
 // Define types for the User and UserRequest structures
@@ -88,22 +89,66 @@ type GameState struct {
     CurrentQuestion int           `json:"currentQuestion"`
     Scores         map[string]int `json:"scores"`
 }
-
+// Removed duplicate Message struct definition
 type Server struct {
-    serverAddress      string
-    mongoClient        *mongo.Client
-    usersCollection    *mongo.Collection
-    lobbiesCollection  *mongo.Collection
+    serverAddress       string
+    mongoClient         *mongo.Client
+    usersCollection     *mongo.Collection
+    lobbiesCollection   *mongo.Collection
     questionsCollection *mongo.Collection
-    mutex              sync.Mutex // Add a mutex for concurrency safety
-}
-
-func NewServer(serverAddress string) *Server {
-    return &Server{
-        serverAddress: serverAddress,
+    mutex               sync.Mutex // Add a mutex for concurrency safety
+    clients             map[*websocket.Conn]bool
+        broadcast           chan Message
     }
-}
+    
+    // Define the Message type
+    type Message struct {
+		LobbyID string `json:"lobbyId"`
+		UserID  string `json:"userId"`
+		Type    string `json:"type"`
+		Content string `json:"content"`
+	}
+	func NewServer(serverAddress string) *Server {
+		return &Server{
+			serverAddress: serverAddress,
+			clients:       make(map[*websocket.Conn]bool),
+			broadcast:     make(chan Message),
+		}
+	}
 
+	func (s *Server) handleConnections(w http.ResponseWriter, r *http.Request) {
+		ws, err := websocket.Upgrade(w, r, nil, 1024, 1024)
+		if err != nil {
+			http.Error(w, "Failed to upgrade to WebSocket", http.StatusInternalServerError)
+			return
+		}
+		defer ws.Close()
+	
+		s.clients[ws] = true
+	
+		for {
+			var msg Message
+			err := ws.ReadJSON(&msg)
+			if err != nil {
+				delete(s.clients, ws)
+				break
+			}
+			s.broadcast <- msg
+		}
+	}
+	
+	func (s *Server) handleMessages() {
+		for {
+			msg := <-s.broadcast
+			for client := range s.clients {
+				err := client.WriteJSON(msg)
+				if err != nil {
+					client.Close()
+					delete(s.clients, client)
+				}
+			}
+		}
+	}
 // MongoDB connection setup
 func (s *Server) ConnectMongoDB() error {
     mongoURI := os.Getenv("MONGO_URI")
@@ -166,18 +211,13 @@ func (s *Server) searchLobbiesHandler(w http.ResponseWriter, r *http.Request) {
 
 // Handle joining a lobby
 func (s *Server) joinLobbyHandler(w http.ResponseWriter, r *http.Request) {
-    if r.Method != "POST" {
-        http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-        return
+    var req struct {
+        LobbyID string `json:"lobby_id"`
+        Username  string `json:"username"`
     }
-
-    var requestData struct {
-        LobbyID    string `json:"lobbyId"`
-        Username   string `json:"username"`
-    }
-
-    if err := json.NewDecoder(r.Body).Decode(&requestData); err != nil {
-        http.Error(w, "Invalid request payload", http.StatusBadRequest)
+    err := json.NewDecoder(r.Body).Decode(&req)
+    if err != nil {
+        http.Error(w, err.Error(), http.StatusBadRequest)
         return
     }
 
@@ -185,61 +225,39 @@ func (s *Server) joinLobbyHandler(w http.ResponseWriter, r *http.Request) {
     defer s.mutex.Unlock()
 
     var lobby Lobby
-    err := s.lobbiesCollection.FindOne(context.TODO(), bson.M{"_id": requestData.LobbyID}).Decode(&lobby)
+    err = s.lobbiesCollection.FindOne(context.TODO(), bson.M{"_id": req.LobbyID}).Decode(&lobby)
     if err != nil {
         http.Error(w, "Lobby not found", http.StatusNotFound)
         return
     }
 
-    lobby.Participants = append(lobby.Participants, requestData.Username)
-
-    _, err = s.lobbiesCollection.UpdateOne(context.TODO(), bson.M{"_id": requestData.LobbyID}, bson.M{"$set": bson.M{"participants": lobby.Participants}})
-    if err != nil {
-        http.Error(w, "Failed to join lobby", http.StatusInternalServerError)
+    if lobby.Status != "waiting" {
+        http.Error(w, "Lobby full", http.StatusForbidden)
         return
     }
 
-    w.WriteHeader(http.StatusOK)
-    json.NewEncoder(w).Encode(lobby)
+    // Add the user to the participants list
+    lobby.Participants = append(lobby.Participants, req.Username)
+
+    lobby.Status = "active"
+
+    // Update the lobby in the database
+    filter := bson.M{"_id": req.LobbyID}
+    update := bson.M{
+        "$set": bson.M{
+            "participants": lobby.Participants,
+            "status":       lobby.Status,
+        },
+    }
+    _, err = s.lobbiesCollection.UpdateOne(context.TODO(), filter, update)
+    if err != nil {
+        http.Error(w, "Failed to update lobby", http.StatusInternalServerError)
+        return
+    }
+
+    json.NewEncoder(w).Encode(map[string]string{"status": "success"})
 }
 
-// Handle starting a game
-func (s *Server) startGameHandler(w http.ResponseWriter, r *http.Request) {
-    if r.Method != "POST" {
-        http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-        return
-    }
-
-    var requestData struct {
-        LobbyID string `json:"lobbyId"`
-    }
-
-    if err := json.NewDecoder(r.Body).Decode(&requestData); err != nil {
-        http.Error(w, "Invalid request payload", http.StatusBadRequest)
-        return
-    }
-
-    s.mutex.Lock()
-    defer s.mutex.Unlock()
-
-    var lobby Lobby
-    err := s.lobbiesCollection.FindOne(context.TODO(), bson.M{"_id": requestData.LobbyID}).Decode(&lobby)
-    if err != nil {
-        http.Error(w, "Lobby not found", http.StatusNotFound)
-        return
-    }
-
-    lobby.Status = "started"
-
-    _, err = s.lobbiesCollection.UpdateOne(context.TODO(), bson.M{"_id": requestData.LobbyID}, bson.M{"$set": bson.M{"status": lobby.Status}})
-    if err != nil {
-        http.Error(w, "Failed to start game", http.StatusInternalServerError)
-        return
-    }
-
-    w.WriteHeader(http.StatusOK)
-    json.NewEncoder(w).Encode(lobby)
-}
 
 // Handle submitting an answer
 func (s *Server) submitAnswerHandler(w http.ResponseWriter, r *http.Request) {
@@ -365,13 +383,15 @@ func (s *Server) createLobbyHandler(w http.ResponseWriter, r *http.Request) {
 
 // Start the server
 func (s *Server) Run() {
+    http.HandleFunc("/ws", s.corsMiddleware(s.handleConnections))
+    go s.handleMessages()
+
     http.HandleFunc("/user/login", s.corsMiddleware(s.userLoginHandler))
     http.HandleFunc("/users", s.corsMiddleware(s.usersHandler))
     http.HandleFunc("/user/", s.corsMiddleware(s.userHandler))
     http.HandleFunc("/createLobby", s.corsMiddleware(s.createLobbyHandler))
     http.HandleFunc("/searchLobbies", s.corsMiddleware(s.searchLobbiesHandler))
     http.HandleFunc("/joinLobby", s.corsMiddleware(s.joinLobbyHandler))
-    http.HandleFunc("/startGame", s.corsMiddleware(s.startGameHandler))
     http.HandleFunc("/submitAnswer", s.corsMiddleware(s.submitAnswerHandler))
     http.HandleFunc("/endGame", s.corsMiddleware(s.endGameHandler))
 
