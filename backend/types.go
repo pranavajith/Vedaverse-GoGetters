@@ -91,16 +91,16 @@ type Server struct {
 
 // Define the Message type
 type Message struct {
-	LobbyID string `json:"lobbyId"`
-	UserID  string `json:"userId"`
-	Type    string `json:"type"`
-	Content string `json:"content"`
-}
-
-type Answer struct {
+	LobbyID    string `json:"lobbyId"`
 	Username   string `json:"username"`
 	Answer     string `json:"answer"`
 	QuestionID string `json:"questionId"`
+	Action     string `json:"action"`
+}
+
+type Answer struct {
+	Username string `json:"username"`
+	Answer   string `json:"answer"`
 }
 
 type JoinLobbyRequest struct {

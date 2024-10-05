@@ -1,0 +1,82 @@
+.pre-solo-game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    width: 100vw;
+    background-color: #161616;
+    color: #ffffff;
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
+  }
+  
+  .pre-solo-game-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: #2b2b2b;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .pre-solo-game-container form label {
+    font-size: 1.5rem;
+    color: #06d6a0;
+    font-family: "Bebas Neue", sans-serif;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  #topic-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #444;
+    color: white;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  
+  #topic-input:focus {
+    background-color: #555;
+    outline: none;
+  }
+  
+  button[type="submit"] {
+    padding: 1rem 2rem;
+    font-size: 1.3rem;
+    background-color: #06d6a0;
+    color: #333;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #04b89f;
+  }
+  
+  @media (max-width: 768px) {
+    .pre-solo-game-container {
+      padding: 1rem;
+    }
+  
+    #topic-input {
+      font-size: 1rem;
+    }
+  
+    button[type="submit"] {
+      font-size: 1.1rem;
+      padding: 0.8rem 1.5rem;
+    }
+  }
+  

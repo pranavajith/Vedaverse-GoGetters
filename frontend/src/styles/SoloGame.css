@@ -1,0 +1,28 @@
+
+.user-homepage-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; 
+    width: 100%;
+    padding: 20px; 
+    box-sizing: border-box; 
+  }
+  
+  .user-homepage-container > :first-child {
+    flex: 0 0 25%; /* UserProgress takes 25% of the total width */
+  }
+  
+  .user-homepage-container > :nth-child(2) {
+    flex: 1; /* UserGameplay takes the remaining space */
+    display: flex;
+    justify-content: center; /* Center-align the UserGameplay component */
+    align-items: center; /* Center-align content vertically within UserGameplay */
+    min-width: 0; /* Prevents overflow issues */
+  }
+
+  
+  .game-topic {
+    font-size: 2rem; /* Font size for topic */
+    margin-bottom: 1rem; /* Space below the topic */
+  }
+  

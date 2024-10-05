@@ -21,13 +21,14 @@ func NewServer(serverAddress string) *Server {
 	}
 }
 
+// Assuming your Message struct has the right fields
+
 func (s *Server) handleConnections(w http.ResponseWriter, r *http.Request) {
 	ws, err := websocket.Upgrade(w, r, nil, 1024, 1024)
 	if err != nil {
 		http.Error(w, "Failed to upgrade to WebSocket", http.StatusInternalServerError)
 		return
 	}
-
 	defer ws.Close()
 
 	var username string
@@ -46,7 +47,14 @@ func (s *Server) handleConnections(w http.ResponseWriter, r *http.Request) {
 			delete(s.userConnections, username)
 			break
 		}
-		s.broadcast <- msg
+
+		// Handle different message types
+		switch msg.Action {
+		case "submitAnswer":
+			s.submitAnswer(msg.LobbyID, msg.Username, msg.Answer)
+		default:
+			log.Println("Unknown action:", msg.Action)
+		}
 	}
 }
 
@@ -108,7 +116,7 @@ func (s *Server) Run() {
 	http.HandleFunc("/createLobby", s.corsMiddleware(s.createLobbyHandler))
 	http.HandleFunc("/searchLobbies", s.corsMiddleware(s.searchLobbiesHandler)) // only send waiting
 	http.HandleFunc("/joinLobby", s.corsMiddleware(s.joinLobbyHandler))
-	http.HandleFunc("/submitAnswer", s.corsMiddleware(s.submitAnswerHandler))
+	// http.HandleFunc("/submitAnswer", s.corsMiddleware(s.submitAnswerHandler))
 	// http.HandleFunc("/endGame", s.corsMiddleware(s.endGameHandler))
 
 	fmt.Println("Server running at", s.serverAddress)

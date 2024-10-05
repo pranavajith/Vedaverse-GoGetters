@@ -4,20 +4,18 @@ import { urlList } from "../../urls";
 import { UserContext } from "../../context/UserContext";
 
 const Level = ({ level, onClick }) => {
-  const { user } = useContext(UserContext);
-
-  const check =
-    user.completedLevels.some(
-      (completedLevel) => completedLevel.levelId === level.number
-    ) || user.ongoingLevel === level.number;
-
+  console.log("here is the level:", level);
+  const check = true;
   return (
     <div
       className={`level ${check ? "unlocked" : "locked"}`}
       onClick={check ? onClick : null}
     >
       <video autoPlay loop muted className="level-video">
-        <source src={level.videoUrl} type="video/mp4" />
+        <source
+          src="https://cdn-icons-mp4.flaticon.com/512/6844/6844338.mp4"
+          type="video/mp4"
+        />
       </video>
 
       {!check && (
