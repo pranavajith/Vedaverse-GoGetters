@@ -82,7 +82,7 @@ type Server struct {
 	mongoClient       *mongo.Client
 	usersCollection   *mongo.Collection
 	lobbiesCollection *mongo.Collection
-	// questionsCollection *mongo.Collection
+	questionsCollection *mongo.Collection
 	mutex           sync.Mutex // Add a mutex for concurrency safety
 	clients         map[*websocket.Conn]bool
 	broadcast       chan Message

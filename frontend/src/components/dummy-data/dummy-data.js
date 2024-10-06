@@ -510,56 +510,56 @@ const testimonials = [
     image: "/testimonial-pics/sridevi.jpg",
     occupation: "LLB, Kerala High Court",
     Testimonial:
-      "80% of civil cases happen because people weren't aware of their duties and rights. This is much needed for many people. Highly recommend!",
-    Date: "September 11, 2024",
+      "Incorporating gamification with AI into education is a game-changer! This platform makes complex legal concepts approachable and fun. It’s engaging, and I can see how this approach would benefit not only students but also professionals who need a quick and interactive learning experience. Highly recommend!",
+    Date: "October 5, 2024",
   },
   {
     name: "Soumya Srivastava",
     image: "/testimonial-pics/soumya.png",
     occupation: "Clinical Psychologist, IIT-BHU",
     Testimonial:
-      "Everyday we see the need for citizens of our country to better understand the Constitution, and respect it. This website is definitely a step in the right direction to ensure the uplifting of the average person of our country.",
-    Date: "September 15, 2024",
+     "AI-powered education platforms with gamification elements are the future. This one really stands out by making learning an interactive and immersive experience. I especially appreciate the emphasis on enhancing educational outcomes while keeping learners motivated. A step forward in modern education!",
+    Date: "October 5, 2024",
   },
   {
     name: "USS Uppuluri",
     image: "/testimonial-pics/uss.jpg",
     occupation: "Entrepreneur, CMD of Edvenswa Enterprises Limited",
     Testimonial:
-      "The platform simplifies constitutional literacy with engaging tools. It’s invaluable for understanding institutional functions, which is crucial for corporate governance and business leaders like me.",
-    Date: "September 15, 2024",
+     "Bringing gamification and AI together for educational purposes is revolutionary. This platform’s approach to making learning engaging is invaluable, especially for business leaders and entrepreneurs who need to stay updated with governance and institutional functions in a fast-paced, digestible way.",
+    Date: "October 5, 2024",
   },
   {
     name: "Ajith Prasad",
     image: "/testimonial-pics/ajith.png",
     occupation: "Executive Manager, Private Firm",
     Testimonial:
-      "Being a resident of Kerala, I know many of my elder relatives and friends who find English government websites very hard to navigate. Having the language feature is very inclusive and gives a regional touch to the website.",
-    Date: "September 16, 2024",
+    "The platform’s use of AI and gamification for educational content is fantastic. It’s not just fun but also incredibly effective. I can see how this would help professionals like me learn on the go while making the experience enjoyable and interactive.",
+    Date: "October 5, 2024",
   },
   {
     name: "Rajesh Gupta",
     image: "/testimonial-pics/rajesh.png",
     occupation: "IIT(BHU) Alumnus, Co-Founder @ DricPro",
     Testimonial:
-      "Aspirational and foresightful entrepreneurs like myself are always looking for quick and effective ways to understand and appreciate the Indian Governance, as well as the Political and Governmental Structure. This makes reading up the Constitution vital. This website would cater to a poweful audience among us.",
-    Date: "September 15, 2024",
+      "Gamifying education with AI tools opens up new avenues for entrepreneurs and business leaders. The way this platform delivers vital information while keeping it fun and accessible is a perfect blend of education and innovation. Truly a next-gen approach to learning.",
+    Date: "October 5, 2024",
   },
   {
     name: "Gayathry Ajith",
     image: "/testimonial-pics/gayathry.jpg",
     occupation: "Chartered Accountant, Big 4",
     Testimonial:
-      "Informative, Educational, Apt. Very much in need in today's generation.",
-    Date: "September 14, 2024",
+      "AI and gamification in education are the way forward, and this platform shows just how effective and enjoyable learning can be. This is exactly what today’s generation needs to stay motivated and achieve their goals while making education more interactive.",
+    Date: "October 6, 2024",
   },
   {
     name: "Dr. Anupama Boinepalli",
     image: "/testimonial-pics/anupama.jpg",
     occupation: "Chief Doctor at Snigdha Ayurvedic Hospitals",
     Testimonial:
-      "Understanding constitutional roles is crucial for healthcare policies. This platform makes it accessible and interactive for professionals navigating legal frameworks in healthcare.",
-    Date: "September 13, 2024",
+      "Using AI and gamification to make learning accessible for healthcare professionals is such an innovative approach. The platform’s interactive design makes understanding complex healthcare policies and legal frameworks easier and more engaging.",
+    Date: "October 6, 2024",
   },
 ];
 
