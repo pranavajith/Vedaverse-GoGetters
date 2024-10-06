@@ -1,0 +1,49 @@
+/* Styles for TopicInput component */
+.topic-input-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height */
+    background-color: #333; /* Background color */
+    color: #ffffff; /* Text color */
+    font-family: "Montserrat", sans-serif; /* Font family */
+  }
+  
+  .topic-input-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center; /* Center text */
+  }
+  
+  .topic-input-form {
+    display: flex;
+    flex-direction: column; /* Stack input and button vertically */
+    width: 80%; /* Form width */
+    max-width: 400px; /* Max width */
+  }
+  
+  .topic-input-field {
+    padding: 1rem; /* Padding for the input */
+    font-size: 1.2rem; /* Font size */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 1rem; /* Space between input and button */
+  }
+  
+  .topic-input-button {
+    padding: 1rem; /* Padding for the button */
+    font-size: 1.2rem; /* Font size */
+    color: #ffffff; /* Text color */
+    background-color: #06d6a0; /* Button color */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer on hover */
+    transition: background-color 0.3s ease; /* Transition for hover effect */
+  }
+  
+  /* Button hover effect */
+  .topic-input-button:hover {
+    background-color: #04b89f; /* Darker shade on hover */
+  }
+  

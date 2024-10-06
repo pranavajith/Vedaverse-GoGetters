@@ -4,7 +4,7 @@ import "./../../styles/UserGameplay.css";
 import React, { useState, useEffect } from "react";
 import TaskScreen from "../GameComponents/TaskScreen";
 
-const UserDisplayWithGame = ({ topic, quizData, onNextRound }) => {
+const UserDisplayWithGame = ({ topic, quizData }) => {
   const [currentLevel, setCurrentLevel] = useState(null);
   const [quizDataWithStatus, setQuizDataWithStatus] = useState([]);
 
@@ -34,9 +34,6 @@ const UserDisplayWithGame = ({ topic, quizData, onNextRound }) => {
           index === roundIndex + 1 ? { ...data, status: "unlocked" } : data
         )
       );
-    } else {
-      // If all rounds are complete, call onNextRound
-      onNextRound();
     }
   };
 
@@ -46,7 +43,7 @@ const UserDisplayWithGame = ({ topic, quizData, onNextRound }) => {
         <TaskScreen
           level={currentLevel}
           handleReturn={handleReturn}
-          onRoundComplete={completeRound} // Pass the function to TaskScreen
+          onRoundComplete={completeRound}
         />
       ) : (
         <UserGameplay

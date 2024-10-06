@@ -8,11 +8,14 @@ export const SoloGame = ({ topic, quizData }) => {
   console.log(quizData);
   return (
     <div className="user-homepage-container">
-      {/* <h2 className="game-topic">Learning Topic: {topic}</h2> */}
+      {/* UserProgress will remain on top */}
       <UserProgress />
-      <UserDisplayWithGame topic={topic[0]} quizData={quizData[0]} />
-      <UserDisplayWithGame topic={topic[1]} quizData={quizData[1]} />
-      <UserDisplayWithGame topic={topic[2]} quizData={quizData[2]} />
+
+      {/* A container to vertically align the two UserDisplayWithGame components */}
+      <div className="game-display-container">
+        <UserDisplayWithGame topic="Intro" quizData={quizData[0]} />
+        <UserDisplayWithGame topic="Advanced" quizData={quizData[1]} />
+      </div>
     </div>
   );
 };

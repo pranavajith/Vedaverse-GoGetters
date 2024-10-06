@@ -1,28 +1,31 @@
-
 .user-homepage-container {
     display: flex;
-    justify-content: center;
-    align-items: flex-start; 
+    flex-direction: row; /* Stack children vertically */
+    justify-content: center; /* Align items at the start */
+    align-items: stretch; /* Stretch children to fill the width */
     width: 100%;
     padding: 20px; 
     box-sizing: border-box; 
-  }
+}
   
-  .user-homepage-container > :first-child {
-    flex: 0 0 25%; /* UserProgress takes 25% of the total width */
-  }
+.user-homepage-container > :first-child {
+    flex: 0 0 auto; /* UserProgress takes its natural height */
+    margin-bottom: 20px; /* Add some space below UserProgress */
+}
   
-  .user-homepage-container > :nth-child(2) {
-    flex: 1; /* UserGameplay takes the remaining space */
-    display: flex;
-    justify-content: center; /* Center-align the UserGameplay component */
-    align-items: center; /* Center-align content vertically within UserGameplay */
-    min-width: 0; /* Prevents overflow issues */
-  }
+.game-display-container {
+    display: flex; /* Enable flex layout for stacking */
+    flex-direction: column; /* Stack UserDisplayWithGame vertically */
+    align-items: stretch; /* Stretch items to fill the width */
+    width: 100%; /* Ensure it takes the full width */
+}
 
-  
-  .game-topic {
+.game-display-container > * {
+    margin: 10px 0; /* Add space between the two UserDisplayWithGame components */
+    width: 100%; /* Make each UserDisplayWithGame take full width */
+}
+
+.game-topic {
     font-size: 2rem; /* Font size for topic */
     margin-bottom: 1rem; /* Space below the topic */
-  }
-  
+}

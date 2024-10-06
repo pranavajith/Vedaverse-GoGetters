@@ -13,7 +13,11 @@ const Level = ({ level, onClick }) => {
     >
       <video autoPlay loop muted className="level-video">
         <source
-          src="https://cdn-icons-mp4.flaticon.com/512/6844/6844338.mp4"
+          src={
+            level.questionType === "TypeGame"
+              ? "https://cdn-icons-mp4.flaticon.com/512/8617/8617218.mp4"
+              : "https://cdn-icons-mp4.flaticon.com/512/6844/6844338.mp4"
+          }
           type="video/mp4"
         />
       </video>
