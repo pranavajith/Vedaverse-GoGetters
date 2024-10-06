@@ -3,6 +3,7 @@ import Level from "./Level";
 import "../../styles/LevelMap.css";
 
 const LevelMap = ({ levelText, levels, onLevelClick }) => {
+  console.log("Here they are!", levels);
   return (
     <div className="level-map">
       <div className="level-text">{levelText}</div>

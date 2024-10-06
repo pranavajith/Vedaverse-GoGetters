@@ -1,12 +1,21 @@
 import UserGameplay from "./UserGameplay";
 import "./../../styles/UserDisplayWithGame.css";
 import "./../../styles/UserGameplay.css";
-import React, { useState } from "react";
-import { gameLevelsModified } from "../dummy-data/dummy-data";
+import React, { useState, useEffect } from "react";
 import TaskScreen from "../GameComponents/TaskScreen";
 
-const UserDisplayWithGame = () => {
+const UserDisplayWithGame = ({ topic, quizData }) => {
   const [currentLevel, setCurrentLevel] = useState(null);
+  const [quizDataWithStatus, setQuizDataWithStatus] = useState([]);
+
+  // Initialize quiz data with status when the component mounts
+  useEffect(() => {
+    const initializedQuizData = quizData.map((data, index) => ({
+      ...data,
+      status: index === 0 ? "unlocked" : "locked", // First element unlocked, others locked
+    }));
+    setQuizDataWithStatus(initializedQuizData);
+  }, [quizData]);
 
   const handleLevelClick = (level) => {
     setCurrentLevel(level);
@@ -16,28 +25,32 @@ const UserDisplayWithGame = () => {
     setCurrentLevel(null);
   };
 
-  const preambleGames = gameLevelsModified
-    .filter((level) => level.levelGroupText === "Preamble")
-    .sort((a, b) => a.number - b.number);
-  const rightsGames = gameLevelsModified
-    .filter((level) => level.levelGroupText === "Rights")
-    .sort((a, b) => a.number - b.number);
+  // Function to handle completing a round
+  const completeRound = (roundIndex) => {
+    // Update the status of the next round to "unlocked"
+    if (roundIndex + 1 < quizDataWithStatus.length) {
+      setQuizDataWithStatus((prevData) =>
+        prevData.map((data, index) =>
+          index === roundIndex + 1 ? { ...data, status: "unlocked" } : data
+        )
+      );
+    }
+  };
 
   return (
     <div className="right-side-display">
       {currentLevel ? (
-        <TaskScreen level={currentLevel} handleReturn={handleReturn} />
+        <TaskScreen
+          level={currentLevel}
+          handleReturn={handleReturn}
+          onRoundComplete={completeRound}
+        />
       ) : (
-        <>
-          <UserGameplay
-            inputLevels={preambleGames}
-            handleLevelClick={handleLevelClick}
-          />
-          <UserGameplay
-            inputLevels={rightsGames}
-            handleLevelClick={handleLevelClick}
-          />
-        </>
+        <UserGameplay
+          inputLevels={quizDataWithStatus}
+          topic={topic}
+          handleLevelClick={handleLevelClick}
+        />
       )}
     </div>
   );

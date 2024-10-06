@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 // can add learn more button at end
 import "./../../../utils/i18n";
 const HomePageUserLogInButtons = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className="button-container">
       <Link to="/signup" className="signup-login-button">
@@ -13,7 +13,8 @@ const HomePageUserLogInButtons = () => {
       </Link>
       <br />
       <Link to="/signin" className="signup-login-button login-button">
-        {t("ahvac")}
+        <span className="ahvac-text">{t("ahvac")}</span>
+        <span className="log-text">{t("log")}</span>
       </Link>
     </div>
   );

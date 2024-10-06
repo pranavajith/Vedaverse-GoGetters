@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h1>WebSocket Test</h1>
+    <script>
+        const ws1 = new WebSocket("ws://localhost:8080/ws?username=player1");
+        const ws2 = new WebSocket("ws://localhost:8080/ws?username=player2");
+
+        ws1.onopen = () => {
+            console.log("Player 1 connected");
+        };
+
+        ws2.onopen = () => {
+            console.log("Player 2 connected");
+        };
+
+        ws1.onmessage = (event) => {
+            console.log("Player 1 received:", event.data);
+        };
+
+        ws2.onmessage = (event) => {
+            console.log("Player 2 received:", event.data);
+        };
+    </script>
+</body>
+</html>

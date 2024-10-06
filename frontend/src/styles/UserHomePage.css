@@ -1,22 +1,49 @@
-/* styles/UserHomePage.css */
-
-.user-homepage-container {
+/* Fullscreen container for buttons */
+.button-container-2 {
   display: flex;
-  justify-content: center; /* Center-align the container items */
-  align-items: flex-start; /* Align items to the top */
-  width: 100%; /* Ensure it takes the full width of the viewport */
-  padding: 20px; /* Optional: Add padding */
-  box-sizing: border-box; /* Make sure padding is included in width calculation */
+  flex-direction: row; 
+  justify-content: center; /* Center buttons horizontally */
+  align-items: center; /* Center buttons vertically */
+  height: 80vh; /* Full viewport height */
+  width: 100vw; /* Full viewport width */
+  background-color: #000000; /* Background color */
 }
 
-.user-homepage-container > :first-child {
-  flex: 0 0 25%; /* UserProgress takes 25% of the total width */
+/* Styling for both buttons */
+.big-button {
+  margin-left: 20px;
+  width: 45%; /* Each button takes up half the width */
+  height: 80%; /* Full height of the container */
+  font-size: 2rem; /* Font size */
+  color: #ffffff; /* Text color */
+  background-color: #06d6a0; /* Button color */
+  border: none; /* No border */
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer; /* Pointer on hover */
+  transition: background-color 0.3s ease; /* Transition for hover effect */
 }
 
-.user-homepage-container > :nth-child(2) {
-  flex: 1; /* UserGameplay takes the remaining space */
-  display: flex;
-  justify-content: center; /* Center-align the UserGameplay component */
-  align-items: center; /* Center-align content vertically within UserGameplay */
-  min-width: 0; /* Prevents overflow issues */
+/* Specific styling for the Single Player button */
+.single-player {
+  background-color: #06d6a0; /* Specific color */
+}
+
+/* Specific styling for the Multiplayer button */
+.multiplayer {
+  background-color: #ff6b6b; /* Different color */
+}
+
+/* Hover effect for buttons */
+.single-player:hover {
+  background-color: #04b89f; /* Darker shade on hover */
+}
+.multiplayer:hover {
+  background-color: #ee2e2e; /* Darker shade on hover */
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .big-button {
+    font-size: 1.5rem; /* Smaller font size on mobile */
+  }
 }

@@ -4,37 +4,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/gorilla/websocket"
 	"go.mongodb.org/mongo-driver/mongo"
 )
-
-type Lobby struct {
-	ID           string    `json:"id" bson:"_id,omitempty"`
-	HostPlayer   string    `json:"hostPlayer"`
-	Questions    []string  `json:"questions"`
-	JoinedPlayer string    `json:"joinedPlayer"`
-	Status       string    `json:"status"`
-	CreatedAt    time.Time `json:"createdAt"`
-	Winner       string    `json:"winner"`
-}
-
-type Question struct {
-	ID            string   `json:"id" bson:"_id,omitempty"`
-	QuestionText  string   `json:"questionText"`
-	Options       []string `json:"options"`
-	CorrectAnswer string   `json:"correctAnswer"`
-}
-
-type GameState struct {
-	LobbyID         string         `json:"lobbyId"`
-	CurrentQuestion int            `json:"currentQuestion"`
-	Scores          map[string]int `json:"scores"`
-}
-
-type LobbyRequest struct {
-	ID        string     `json:"id" bson:"_id,omitempty"`
-	Host      string     `json:"host"`      // Username of the user who created the lobby
-	Questions []Question `json:"questions"` // Questions for the game
-}
 
 // Define types for the User and UserRequest structures
 type CompletedLevel struct {
@@ -85,10 +57,53 @@ type User struct {
 	UserProfileImage ProfileImage     `json:"userProfileImage"`
 }
 
+// Define types for the Lobby, Question, and GameState structures
+type Lobby struct {
+	ID           string         `json:"id" bson:"_id,omitempty"`
+	Creator      string         `json:"creator"`
+	Questions    []Question     `json:"questions"`
+	Participants []string       `json:"participants"`
+	Status       string         `json:"status"`
+	CreatedAt    time.Time      `json:"createdAt"`
+	Scores       map[string]int `json:"scores"`       // Add Scores field
+	CurrentIndex int            `json:"currentIndex"` // Add CurrentQuestion field
+}
+
+type Question struct {
+	ID            string   `json:"id" bson:"_id,omitempty"`
+	QuestionText  string   `json:"questionText"`
+	Options       []string `json:"options"`
+	CorrectAnswer string   `json:"correctAnswer"`
+}
+
+// Removed duplicate Message struct definition
 type Server struct {
 	serverAddress     string
 	mongoClient       *mongo.Client
 	usersCollection   *mongo.Collection
 	lobbiesCollection *mongo.Collection
-	mutex             sync.Mutex
+	// questionsCollection *mongo.Collection
+	mutex           sync.Mutex // Add a mutex for concurrency safety
+	clients         map[*websocket.Conn]bool
+	broadcast       chan Message
+	userConnections map[string]*websocket.Conn
+}
+
+// Define the Message type
+type Message struct {
+	LobbyID    string `json:"lobbyId"`
+	Username   string `json:"username"`
+	Answer     string `json:"answer"`
+	QuestionID string `json:"questionId"`
+	Action     string `json:"action"`
+}
+
+type Answer struct {
+	Username string `json:"username"`
+	Answer   string `json:"answer"`
+}
+
+type JoinLobbyRequest struct {
+	LobbyID  string `json:"lobby_id"`
+	Username string `json:"username"`
 }

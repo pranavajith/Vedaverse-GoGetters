@@ -1,0 +1,112 @@
+
+.button {
+    width: 220px;
+    height: 55px;
+    font-size: 18px;
+    background-color: #4caf50; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px; /* Space between buttons */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .button:hover {
+    background-color: #45a049;
+  }
+  
+  .create-game {
+    background-color: #2196f3;
+  }
+  
+  .create-game:hover {
+    background-color: #1e88e5;
+  }
+  
+  .join-game {
+    background-color: #f44336;
+  }
+  
+  .join-game:hover {
+    background-color: #e53935;
+  }
+  
+  .cloud-container {
+    position: relative;
+    width: 500px; /* Increased width */
+    height: 250px; /* Increased height */
+    background-color: #f0f8ff; /* Light cloud color */
+    border-radius: 100px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px; /* Padding to give space inside the cloud */
+    height: 200px; /* control the size */
+      aspect-ratio: 1.5;
+      --g: radial-gradient(55% 55%, #000 98%, #0000) no-repeat;
+      mask: var(--g) 100% 100%/30% 60%,var(--g) 70% 0/50% 100%,var(--g) 0 100%/36% 68%,var(--g) 27% 18%/26% 40%,linear-gradient(#000 0 0) bottom/67% 58% no-repeat;
+      background: #f0f8ff;
+  }
+  .cloud-container::before,
+  .cloud-container::after {
+    content: '';
+    position: absolute;
+    --g: radial-gradient(50% 55%, #000 98%, #0000) no-repeat;
+      mask: var(--g) 100% 100%/30% 60%,var(--g) 70% 0/50% 100%,var(--g) 0 100%/36% 68%,var(--g) 27% 18%/26% 40%,linear-gradient(#000 0 0) bottom/67% 58% no-repeat;
+      background: #f0f8ff;
+  }
+  .cloud-container::before {
+    width: 170px;
+    height: 170px;
+    top: -80px; /* Positioned slightly higher */
+    left: -50px; /* Left side cloud part */
+  }
+  
+  .cloud-container::after {
+    width: 180px;
+    height: 180px;
+    top: -90px; /* Positioned slightly higher */
+    right: -50px; /* Right side cloud part */
+  }
+  
+  .status-message {
+    background-color: #4caf50; /* Message box green */
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .status-message span {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: normal;
+  }
+  
+  .status-message i {
+    font-size: 20px;
+    margin-right: 8px;
+  }
+  @media (max-width: 600px) {
+    .cloud-container {
+      width: 250px;
+      height: 150px;
+    }
+  
+    .button {
+      width: 150px;
+      height: 45px;
+      font-size: 16px;
+    }
+  }

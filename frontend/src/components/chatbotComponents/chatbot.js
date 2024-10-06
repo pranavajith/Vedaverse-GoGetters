@@ -23,8 +23,8 @@ const ChatBot = () => {
     try {
       // Modify the prompt to pre-prompt the model
       const prompt = `
-            You are an AI expert on the Indian Constitution. Please only answer questions directly related to the Indian Constitution. 
-            If the user's question is not related to the Indian Constitution, respond with: "Sorry, I can only answer questions about the Indian Constitution."
+            You are tasked to answer any user question that is appropriate and not intended in a harmful or inappropriate way. If you find any, please reject with a polite message.
+            Answer in a 50-100 words and concise manner, unless specified otherwise.
             User question: ${input}`;
 
       const result = await model.generateContent(prompt);
@@ -99,7 +99,7 @@ const ChatBot = () => {
         <div className="animation-placeholder">
           <ChatbotAnimation />
           <p className="welcome-message">
-            Welcome! Ask me about the Indian Constitution.
+            Welcome! Ask me anything, and let's dive into learning together.
           </p>
         </div>
       )}

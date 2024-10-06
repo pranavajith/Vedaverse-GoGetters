@@ -5,7 +5,7 @@ const constitutional_questions = {
     {
       question:
         "Who was the Chairman of the Drafting Committee of the Indian Constitution?",
-      Options: [
+      options: [
         { value: "Jawaharlal Nehru", correctStatus: false },
         { value: "Dr. B.R. Ambedkar", correctStatus: true },
         { value: "Sardar Vallabhbhai Patel", correctStatus: false },
@@ -15,7 +15,7 @@ const constitutional_questions = {
     {
       question:
         "On which date did the Indian Constitution come into effect, marking the birth of the Republic of India?",
-      Options: [
+      options: [
         { value: "15th August 1947", correctStatus: false },
         { value: "26th November 1949", correctStatus: false },
         { value: "26th January 1950", correctStatus: true },
@@ -25,7 +25,7 @@ const constitutional_questions = {
     {
       question:
         "Who was the first President of India, who took office on the same day the Constitution came into force?",
-      Options: [
+      options: [
         { value: "Dr. Rajendra Prasad", correctStatus: true },
         { value: "C. Rajagopalachari", correctStatus: false },
         { value: "Sarvepalli Radhakrishnan", correctStatus: false },
@@ -35,7 +35,7 @@ const constitutional_questions = {
     {
       question:
         "How many Articles did the original Indian Constitution have when it was first adopted in 1949?",
-      Options: [
+      options: [
         { value: "395", correctStatus: true },
         { value: "448", correctStatus: false },
         { value: "368", correctStatus: false },
@@ -45,7 +45,7 @@ const constitutional_questions = {
     {
       question:
         "Which country’s Constitution inspired the Directive Principles of State Policy included in the Indian Constitution?",
-      Options: [
+      options: [
         { value: "United States", correctStatus: false },
         { value: "United Kingdom", correctStatus: false },
         { value: "Ireland", correctStatus: true },
@@ -57,7 +57,7 @@ const constitutional_questions = {
     {
       question:
         "In what year did the Constituent Assembly adopt the Constitution of India?",
-      Options: [
+      options: [
         { value: "1948", correctStatus: false },
         { value: "1949", correctStatus: true },
         { value: "1950", correctStatus: false },
@@ -67,7 +67,7 @@ const constitutional_questions = {
     {
       question:
         "Which of the following is NOT a value mentioned in the Preamble of the Indian Constitution?",
-      Options: [
+      options: [
         { value: "Justice", correctStatus: false },
         { value: "Liberty", correctStatus: false },
         { value: "Monarchy", correctStatus: true },
@@ -77,7 +77,7 @@ const constitutional_questions = {
     {
       question:
         "According to the Preamble, which type of equality is guaranteed to Indian citizens?",
-      Options: [
+      options: [
         { value: "Social", correctStatus: false },
         { value: "Economic", correctStatus: false },
         { value: "Political", correctStatus: false },
@@ -87,7 +87,7 @@ const constitutional_questions = {
     // {
     //   question:
     //     "Which word was added to the Preamble of the Indian Constitution by the 42nd Amendment in 1976?",
-    //   Options: [
+    //   options: [
     //     { value: "Secular", correctStatus: false },
     //     { value: "Socialist", correctStatus: false },
     //     { value: "Both Secular and Socialist", correctStatus: true },
@@ -95,7 +95,7 @@ const constitutional_questions = {
     //   ],
     // },
     // { "question": "Which value in the Preamble promotes a sense of brotherhood among all citizens?",
-    //     "Options": [
+    //     "options": [
     //         { "value": "Liberty", "correctStatus": false },
     //         { "value": "Justice", "correctStatus": false },
     //         { "value": "Fraternity", "correctStatus": true },
@@ -103,7 +103,7 @@ const constitutional_questions = {
     //     ]
     // },
     // { "question": "Which aspect of 'Justice' is NOT explicitly mentioned in the Preamble of the Indian Constitution?",
-    //     "Options": [
+    //     "options": [
     //         { "value": "Social", "correctStatus": false },
     //         { "value": "Economic", "correctStatus": false },
     //         { "value": "Political", "correctStatus": false },
@@ -113,7 +113,7 @@ const constitutional_questions = {
     {
       question:
         "What is the first word of the Preamble of the Indian Constitution?",
-      Options: [
+      options: [
         { value: "We", correctStatus: true },
         { value: "The", correctStatus: false },
         { value: "India", correctStatus: false },
@@ -122,7 +122,7 @@ const constitutional_questions = {
     },
     {
       question: "The Preamble declares India to be a __________ Republic.",
-      Options: [
+      options: [
         {
           value: "Sovereign, Socialist, Secular, Democratic",
           correctStatus: true,
@@ -136,7 +136,7 @@ const constitutional_questions = {
   legislature_questions: [
     {
       question: "What is the maximum term of the Lok Sabha?",
-      Options: [
+      options: [
         { value: "4 years", correctStatus: false },
         { value: "5 years", correctStatus: true },
         { value: "6 years", correctStatus: false },
@@ -146,7 +146,7 @@ const constitutional_questions = {
     {
       question:
         "Which house of the Indian Parliament is known as the ‘House of the People’?",
-      Options: [
+      options: [
         { value: "Rajya Sabha", correctStatus: false },
         { value: "Vidhan Sabha", correctStatus: false },
         { value: "Legislative Assembly", correctStatus: false },
@@ -156,7 +156,7 @@ const constitutional_questions = {
     {
       question:
         "How many members of the Rajya Sabha are nominated by the President?",
-      Options: [
+      options: [
         { value: "12", correctStatus: true },
         { value: "10", correctStatus: false },
         { value: "14", correctStatus: false },
@@ -166,7 +166,7 @@ const constitutional_questions = {
     {
       question:
         "The concept of 'Bicameralism' in Indian Parliament refers to which of the following?",
-      Options: [
+      options: [
         { value: "Having only one house", correctStatus: false },
         {
           value: "Having two houses: Lok Sabha and Rajya Sabha",
@@ -185,7 +185,7 @@ const constitutional_questions = {
     {
       question:
         "Who can preside over the joint session of both houses of Parliament?",
-      Options: [
+      options: [
         { value: "President", correctStatus: false },
         { value: "Prime Minister", correctStatus: false },
         { value: "Speaker of Lok Sabha", correctStatus: true },
@@ -196,7 +196,7 @@ const constitutional_questions = {
   executive_questions: [
     {
       question: "Who is the head of the Union Executive in India?",
-      Options: [
+      options: [
         { value: "Prime Minister", correctStatus: false },
         { value: "Vice-President", correctStatus: false },
         { value: "Chief Justice of India", correctStatus: false },
@@ -205,7 +205,7 @@ const constitutional_questions = {
     },
     {
       question: "What is the term of office for the President of India?",
-      Options: [
+      options: [
         { value: "5 years", correctStatus: true },
         { value: "6 years", correctStatus: false },
         { value: "4 years", correctStatus: false },
@@ -215,7 +215,7 @@ const constitutional_questions = {
     {
       question:
         "Which of the following appointments is made by the President of India?",
-      Options: [
+      options: [
         { value: "Speaker of Lok Sabha", correctStatus: false },
         { value: "Governor of RBI", correctStatus: false },
         { value: "Chief Minister", correctStatus: false },
@@ -225,7 +225,7 @@ const constitutional_questions = {
     {
       question:
         "Which of the following is NOT a function of the Indian President?",
-      Options: [
+      options: [
         { value: "Appointing the Prime Minister", correctStatus: false },
         { value: "Dissolving the Lok Sabha", correctStatus: false },
         { value: "Passing ordinances", correctStatus: false },
@@ -237,7 +237,7 @@ const constitutional_questions = {
     },
     {
       question: "Who chairs the meetings of the Union Cabinet?",
-      Options: [
+      options: [
         { value: "President", correctStatus: false },
         { value: "Prime Minister", correctStatus: true },
         { value: "Vice President", correctStatus: false },
@@ -248,7 +248,7 @@ const constitutional_questions = {
   judiciary_questions: [
     {
       question: "What is the highest judicial body in India?",
-      Options: [
+      options: [
         { value: "Supreme Court", correctStatus: true },
         { value: "High Court", correctStatus: false },
         { value: "District Court", correctStatus: false },
@@ -258,7 +258,7 @@ const constitutional_questions = {
     {
       question:
         "What is the retirement age of a judge of the Supreme Court of India?",
-      Options: [
+      options: [
         { value: "62 years", correctStatus: false },
         { value: "60 years", correctStatus: false },
         { value: "65 years", correctStatus: true },
@@ -268,7 +268,7 @@ const constitutional_questions = {
     {
       question:
         "Which article of the Indian Constitution deals with the establishment of the Supreme Court?",
-      Options: [
+      options: [
         { value: "Article 124", correctStatus: true },
         { value: "Article 74", correctStatus: false },
         { value: "Article 352", correctStatus: false },
@@ -277,7 +277,7 @@ const constitutional_questions = {
     },
     {
       question: "Who can remove a Supreme Court judge?",
-      Options: [
+      options: [
         { value: "Prime Minister", correctStatus: false },
         { value: "Chief Justice of India", correctStatus: false },
         { value: "Law Minister", correctStatus: false },
@@ -290,7 +290,7 @@ const constitutional_questions = {
     {
       question:
         "Which of the following writs is NOT issued by the Supreme Court?",
-      Options: [
+      options: [
         { value: "Habeas Corpus", correctStatus: false },
         { value: "Mandamus", correctStatus: false },
         { value: "Injunction", correctStatus: true },
@@ -510,56 +510,56 @@ const testimonials = [
     image: "/testimonial-pics/sridevi.jpg",
     occupation: "LLB, Kerala High Court",
     Testimonial:
-      "80% of civil cases happen because people weren't aware of their duties and rights. This is much needed for many people. Highly recommend!",
-    Date: "September 11, 2024",
+      "Incorporating gamification with AI into education is a game-changer! This platform makes complex legal concepts approachable and fun. It’s engaging, and I can see how this approach would benefit not only students but also professionals who need a quick and interactive learning experience. Highly recommend!",
+    Date: "October 5, 2024",
   },
   {
     name: "Soumya Srivastava",
     image: "/testimonial-pics/soumya.png",
     occupation: "Clinical Psychologist, IIT-BHU",
     Testimonial:
-      "Everyday we see the need for citizens of our country to better understand the Constitution, and respect it. This website is definitely a step in the right direction to ensure the uplifting of the average person of our country.",
-    Date: "September 15, 2024",
+      "AI-powered education platforms with gamification elements are the future. This one really stands out by making learning an interactive and immersive experience. I especially appreciate the emphasis on enhancing educational outcomes while keeping learners motivated. A step forward in modern education!",
+    Date: "October 5, 2024",
   },
   {
     name: "USS Uppuluri",
     image: "/testimonial-pics/uss.jpg",
     occupation: "Entrepreneur, CMD of Edvenswa Enterprises Limited",
     Testimonial:
-      "The platform simplifies constitutional literacy with engaging tools. It’s invaluable for understanding institutional functions, which is crucial for corporate governance and business leaders like me.",
-    Date: "September 15, 2024",
+      "Bringing gamification and AI together for educational purposes is revolutionary. This platform’s approach to making learning engaging is invaluable, especially for business leaders and entrepreneurs who need to stay updated with governance and institutional functions in a fast-paced, digestible way.",
+    Date: "October 5, 2024",
   },
   {
     name: "Ajith Prasad",
     image: "/testimonial-pics/ajith.png",
     occupation: "Executive Manager, Private Firm",
     Testimonial:
-      "Being a resident of Kerala, I know many of my elder relatives and friends who find English government websites very hard to navigate. Having the language feature is very inclusive and gives a regional touch to the website.",
-    Date: "September 16, 2024",
+      "The platform’s use of AI and gamification for educational content is fantastic. It’s not just fun but also incredibly effective. I can see how this would help professionals like me learn on the go while making the experience enjoyable and interactive.",
+    Date: "October 5, 2024",
   },
   {
     name: "Rajesh Gupta",
     image: "/testimonial-pics/rajesh.png",
     occupation: "IIT(BHU) Alumnus, Co-Founder @ DricPro",
     Testimonial:
-      "Aspirational and foresightful entrepreneurs like myself are always looking for quick and effective ways to understand and appreciate the Indian Governance, as well as the Political and Governmental Structure. This makes reading up the Constitution vital. This website would cater to a poweful audience among us.",
-    Date: "September 15, 2024",
+      "Gamifying education with AI tools opens up new avenues for entrepreneurs and business leaders. The way this platform delivers vital information while keeping it fun and accessible is a perfect blend of education and innovation. Truly a next-gen approach to learning.",
+    Date: "October 5, 2024",
   },
   {
     name: "Gayathry Ajith",
     image: "/testimonial-pics/gayathry.jpg",
     occupation: "Chartered Accountant, Big 4",
     Testimonial:
-      "Informative, Educational, Apt. Very much in need in today's generation.",
-    Date: "September 14, 2024",
+      "AI and gamification in education are the way forward, and this platform shows just how effective and enjoyable learning can be. This is exactly what today’s generation needs to stay motivated and achieve their goals while making education more interactive.",
+    Date: "October 6, 2024",
   },
   {
     name: "Dr. Anupama Boinepalli",
     image: "/testimonial-pics/anupama.jpg",
     occupation: "Chief Doctor at Snigdha Ayurvedic Hospitals",
     Testimonial:
-      "Understanding constitutional roles is crucial for healthcare policies. This platform makes it accessible and interactive for professionals navigating legal frameworks in healthcare.",
-    Date: "September 13, 2024",
+      "Using AI and gamification to make learning accessible for healthcare professionals is such an innovative approach. The platform’s interactive design makes understanding complex healthcare policies and legal frameworks easier and more engaging.",
+    Date: "October 6, 2024",
   },
 ];
 

@@ -80,7 +80,7 @@ const QuestionSlider = ({
             )}
             <p>{question.question}</p>
             <div className="options">
-              {question.Options.map((option, index) => (
+              {question.options?.map((option, index) => (
                 <button
                   key={index}
                   className="option-button"
@@ -100,7 +100,7 @@ const QuestionSlider = ({
                 ) : (
                   <span>
                     <h3 className="red-text">Incorrect!</h3>The correct answer
-                    is: {question.Options.find((o) => o.correctStatus).value}
+                    is: {question.options.find((o) => o.correctStatus).value}
                   </span>
                 )}
                 <br />
