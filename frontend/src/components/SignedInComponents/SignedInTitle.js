@@ -15,7 +15,7 @@ const SignedInTitle = () => {
   return (
     <nav className="navbar">
       <Link to="/user">
-        <h1 className="navbar-brand">Samvidhan</h1>
+        <h1 className="navbar-brand">EdVenture</h1>
       </Link>
       <ul className="navbar-menu">
         <li className="navbar-item">

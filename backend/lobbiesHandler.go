@@ -45,93 +45,6 @@ func (s *Server) searchLobbiesHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write(lobbiesJSON)
 }
 
-// // Handle submitting an answer
-// func (s *Server) submitAnswerHandler(w http.ResponseWriter, r *http.Request) {
-// 	if r.Method != "POST" {
-// 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-// 		return
-// 	}
-
-// 	var requestData struct {
-// 		LobbyID    string `json:"lobbyId"`
-// 		Username   string `json:"username"`
-// 		Answer     string `json:"answer"`
-// 		QuestionID string `json:"questionId"`
-// 	}
-
-// 	if err := json.NewDecoder(r.Body).Decode(&requestData); err != nil {
-// 		http.Error(w, "Invalid request payload", http.StatusBadRequest)
-// 		return
-// 	}
-
-// 	s.mutex.Lock()
-// 	defer s.mutex.Unlock()
-
-// 	var lobby Lobby
-// 	err := s.lobbiesCollection.FindOne(context.TODO(), bson.M{"_id": requestData.LobbyID}).Decode(&lobby)
-// 	if err != nil {
-// 		http.Error(w, "Lobby not found", http.StatusNotFound)
-// 		return
-// 	}
-
-// 	var question Question
-// 	found := false
-
-// 	for _, q := range lobby.Questions {
-// 		if q.ID == requestData.QuestionID {
-// 			question = q
-// 			found = true
-// 			break
-// 		}
-// 	}
-
-// 	if !found {
-// 		http.Error(w, "Question not found in lobby", http.StatusNotFound)
-// 		return
-// 	}
-
-// 	if question.CorrectAnswer == requestData.Answer {
-// 		// Update the score
-// 		if lobby.Scores == nil {
-// 			lobby.Scores = make(map[string]int)
-// 		}
-// 		lobby.Scores[requestData.Username]++
-// 	} else {
-// 		lobby.Scores[requestData.Username]--
-// 	}
-
-// 	if lobby.CurrentIndex < len(lobby.Questions)-1 {
-
-// 		_, err = s.lobbiesCollection.UpdateOne(context.TODO(), bson.M{"_id": requestData.LobbyID}, bson.M{"$set": bson.M{"scores": lobby.Scores}})
-// 		if err != nil {
-// 			http.Error(w, "Failed to submit answer", http.StatusInternalServerError)
-// 			return
-// 		}
-// 	} else {
-// 		// End the game
-// 		lobby.Status = "ended"
-// 		_, err = s.lobbiesCollection.UpdateOne(context.TODO(), bson.M{"_id": requestData.LobbyID}, bson.M{"$set": bson.M{"scores": lobby.Scores, "status": lobby.Status}})
-// 		if err != nil {
-// 			http.Error(w, "Failed to end game", http.StatusInternalServerError)
-// 			return
-// 		}
-// 		for username, score := range lobby.Scores {
-// 			_, err := s.usersCollection.UpdateOne(
-// 				context.TODO(),
-// 				bson.M{"username": username},
-// 				bson.M{"$inc": bson.M{"multiPlayerScore": score}},
-// 			)
-// 			if err != nil {
-// 				http.Error(w, "Failed to update user scores", http.StatusInternalServerError)
-// 				return
-// 			}
-// 		}
-
-// 	}
-// 	w.WriteHeader(http.StatusOK)
-// 	json.NewEncoder(w).Encode(lobby)
-// }
-
 // Handle creating a lobby
 func (s *Server) createLobbyHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
@@ -226,14 +139,14 @@ func (s *Server) startGame(lobby Lobby) {
 		return
 	}
 
-	question := lobby.Questions[lobby.CurrentIndex]
+	// question := lobby.Questions[lobby.CurrentIndex]
 
 	// Set up WebSocket connections for both participants
-	for _, username := range lobby.Participants {
-		// Handle WebSocket connections for both participants
-		wsConn := s.getConnectionForUser(username) // Implement this method to get the connection
-		go s.sendQuestion(wsConn, question, lobby) // Pass the lobby as a parameter
-	}
+	// for _, username := range lobby.Participants {
+	// 	// Handle WebSocket connections for both participants
+	// 	// wsConn := s.getConnectionForUser(username) // Implement this method to get the connection
+	// 	go s.sendQuestion(wsConn, question, lobby) // Pass the lobby as a parameter
+	// }
 }
 
 func (s *Server) sendQuestion(ws *websocket.Conn, question Question, lobby Lobby) {

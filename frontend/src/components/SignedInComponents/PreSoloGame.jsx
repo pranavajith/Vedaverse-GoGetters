@@ -68,13 +68,13 @@ const PreSoloGame = () => {
           "levelName": "Final Round",
           "questionType": "TypeGame",
           "questionData": {
-            "text": (Generate a 50-word paragraph on the first generated short heading. Use relevant and important words in the paragraph.),
+            "text": (Generate a 50-word informative paragraph on the first generated short heading. Use relevant and important words in the paragraph.),
             "keywords": [
               {
-                "word": Choose an important word from the aobve paragraph,
+                "word": Choose an important word from the above paragraph,
                 "choices": [Give 3 words, 2 of which are wrong, and the third is the chosen word above],
                 // Make sure the choices are single words.
-                // The chosen word (Z) MUST be present in the paragraph.
+                // One of the choices MUST be the chosen word.
               },
               ...
             ]
@@ -124,13 +124,13 @@ const PreSoloGame = () => {
           "levelName": "Final Round",
           "questionType": "TypeGame",
           "questionData": {
-            "text": (Generate a 50-word paragraph on the second generated short heading. Use relevant and important words in the paragraph.),
+            "text": (Generate a 50-word informative paragraph on the second generated short heading. Use relevant and important words in the paragraph.),
             "keywords": [
               {
                 "word": Choose an important word from the aobve paragraph,
                 "choices": [Give 3 words, 2 of which are wrong, and the third is the chosen word above],
                 // Make sure the choices are single words.
-                // The chosen word (Z) MUST be present in the paragraph.
+                // One of the choices MUST be the chosen word.
               },
               ...
             ]
