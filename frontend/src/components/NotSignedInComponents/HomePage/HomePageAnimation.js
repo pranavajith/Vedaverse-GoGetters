@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 // can add learn more button at end
 import "./../../../utils/i18n";
 const HomePageAnimation = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   return (
     <div className="homepage-animation-text-container">
       <div className="homepage-animation-container">
@@ -35,7 +35,7 @@ const HomePageAnimation = () => {
           autoplay
         ></dotlottie-player>
       </div>
-      
+
       <div className="text-container">
         <span className="large">{t("pc")}</span>
         <span className="medium">{t("at")}</span>

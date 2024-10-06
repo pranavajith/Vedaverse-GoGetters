@@ -21,7 +21,7 @@
   justify-content: center;
   align-items: center;
   width: 15%;
-  background-color: #06d6a0;
+  background-color: #fc9953;
   color: white;
   font-family: "Happy Monkey", system-ui;
   font-weight: 400;
@@ -54,7 +54,7 @@
 .level-connector {
   width: 270px;
   height: 10px;
-  background-color: #06d6a0;
+  background-color: #fc9953;
   margin: 0;
 }
 

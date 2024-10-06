@@ -9,7 +9,7 @@
 .signup-login-button {
   display: inline-block;
   padding: 1rem 3rem;
-  background-color: #06d6a0;
+  background-color: #fc9953;
   color: white;
   text-decoration: none;
   font-family: "Happy Monkey", system-ui;
@@ -24,20 +24,26 @@
 }
 
 .signup-button {
-  background-color: #06d6a0;
+  background-color: #fc9c53;
 }
 
 .signup-button:hover {
-  background-color: #05c08c;
+  background-color: #fc9953;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
 }
 
 .login-button {
-  background-color: #f9c74f;
-  color: #333; /* Dark text color for better contrast */
+  background-color: #fc9953;
+}
+.ahvac-text {
+  color: white; /* Color for ahvac text */
+}
+
+.log-text {
+  color: #4b39bd; /* Color for log text */
 }
 
 .login-button:hover {
-  background-color: #e0b445;
+  background-color: #fc9953;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
 }

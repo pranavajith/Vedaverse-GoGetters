@@ -99,7 +99,7 @@ const ChatBot = () => {
         <div className="animation-placeholder">
           <ChatbotAnimation />
           <p className="welcome-message">
-            Welcome! Ask me about the Indian Constitution.
+            Welcome! Ask me anything, and let's dive into learning together.
           </p>
         </div>
       )}

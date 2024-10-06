@@ -18,6 +18,7 @@ dotlottie-player {
 .text-container {
   text-align: center; /* Center the text */
   margin-top: 20px; /* Space above the text */
+  color: #4b39bd;
 }
 
 .text-container span {

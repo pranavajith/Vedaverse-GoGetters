@@ -7,6 +7,7 @@
   width: 100%; /* Ensure it takes the full width of the viewport */
   padding: 20px; /* Optional: Add padding */
   box-sizing: border-box; /* Make sure padding is included in width calculation */
+  background-color: white;
 }
 
 .user-homepage-container > :first-child {

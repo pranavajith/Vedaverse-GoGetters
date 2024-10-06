@@ -17,11 +17,6 @@ const TitleBar = () => {
           </Link>
         </li>
         <li className="navbar-item">
-          <Link to="/timeline" className="navbar-button">
-            {t("timeline")}
-          </Link>
-        </li>
-        <li className="navbar-item">
           <Link to="/demo" className="navbar-button">
             {t("Demo")}
           </Link>

@@ -5,7 +5,7 @@
   top: 0;
   width: 100%;
   height: 100vh;
-  background-color: #161616;
+  background-color: #ffdbc1;
   transition: 1s;
 }
 
@@ -18,7 +18,7 @@
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white;
+  color: #4b39bd;
 }
 
 .logo {

@@ -1,10 +1,20 @@
 /* Container for the login page */
+.signin-contain {
+  display: flex; /* Use Flexbox layout */
+  justify-content: center; /* Space out the child elements */
+  align-items: center; /* Align items at the start of the container */
+  gap: 20px; /* Optional: Adjust space between the elements if needed */
+  padding: 50px; /* Optional: Adjust padding around the container */
+  background-color: #ffffff; /* Set the background color to a soft peach */
+}
+
 .signin-container {
   padding: 2rem;
-  max-width: 400px;
+  max-width: 800px;
+  width: 100%;
   margin: 25px auto;
-  background-color: #333;
-  color: white;
+  background-color: #fac8a4; /* Peach background color */
+  color: rgb(255, 255, 255); /* Change text color to black */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: "Happy Monkey", system-ui;
@@ -13,7 +23,7 @@
 /* Title of the login page */
 .signin-title {
   font-size: 2rem;
-  color: #06d6a0;
+  color: #fc9953; /* Change title color to black */
   text-align: center;
   margin-bottom: 1.5rem;
 }
@@ -21,6 +31,7 @@
 /* Form styling */
 .signin-form {
   display: flex;
+
   flex-direction: column;
 }
 
@@ -33,25 +44,26 @@
 .form-group label {
   display: block;
   font-size: 1rem;
-  color: #ffffff;
+  color: #fc9953; /* Change label color to black */
   margin-bottom: 0.5rem;
 }
 
 /* Input fields */
-.form-group input {
+.form-group input[type="text"],
+.form-group input[type="password"] {
   width: 100%;
   padding: 0.8rem;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
-  background-color: #555;
-  color: #ffffff;
+  background-color: #dcdbdb; /* Change input background to light gray for better visibility */
+  color: black; /* Change input text color to black */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
 }
 
 .form-group input::placeholder {
-  color: #bbbbbb;
+  color: #888; /* Change placeholder color to a darker gray */
 }
 
 /* Input hover effect */
@@ -63,7 +75,7 @@
 
 /* Login button */
 .signin-button {
-  background-color: #06d6a0;
+  background-color: #fc9953; /* Keep peach background for button */
   color: white;
   padding: 0.8rem;
   font-size: 1rem;
@@ -77,9 +89,8 @@
   width: 150px; /* Adjust the width to fit content */
 }
 
-
 .signin-button:hover {
-  background-color: #05c08c;
+  background-color: #fc9953; /* Keep peach color on hover */
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
@@ -87,10 +98,11 @@
 .signin-footer {
   text-align: center;
   margin-top: 2rem;
+  color: #888;
 }
 
 .signin-footer a {
-  color: #06d6a0;
+  color: #fc9953; /* Keep peach color for footer links */
   text-decoration: none;
   font-weight: 500;
 }

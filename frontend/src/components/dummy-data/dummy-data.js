@@ -1,4 +1,17 @@
 import { urlList } from "../../urls";
+const userData = {
+  firstName: "Pranav",
+  lastName: "Ajith",
+  username: "pranav",
+  email: "a@a.com",
+  completedArray: [],
+  ongoingLevel: 1,
+  multiPlayerScore: 0,
+  password: "",
+  userProfileImage: {
+    path: "https://png.pngtree.com/background/20230528/original/pngtree-photo-of-a-girl-in-sunglasses-picture-image_2778708.jpg",
+  },
+};
 
 const constitutional_questions = {
   constitution_history_questions: [
@@ -569,4 +582,5 @@ export {
   constitutional_questions,
   constitutional_events,
   TypeGameData,
+  userData,
 };

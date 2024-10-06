@@ -1,15 +1,15 @@
 /* Container for the entire page */
 .about-us-container {
   padding: 2rem;
-  background-color: #333;
+  background-color: #ffffff; /* Background color set to white */
   font-family: "Happy Monkey", system-ui;
-  color: #ffffff;
+  color: #000000; /* Text color set to black */
 }
 
 /* Title of the page */
 .about-us-title {
   font-size: 2.5rem;
-  color: #06d6a0;
+  color: #fc9953; /* Retaining the peach color for the title */
   text-align: center;
   margin-bottom: 2rem;
 }
@@ -57,20 +57,20 @@
   font-size: 1.2rem;
   font-weight: 500;
   margin: 0;
-  color: #ffffff;
+  color: #000000; /* Change to a dark gray for better readability */
 }
 
 /* Team member role styling */
 .team-role {
   font-size: 1rem;
   font-weight: 300;
-  color: #b4b4b4;
+  color: #2a2626; /* Keeping the original color for contrast */
 }
 
 /* Hackathon section */
 .hackathon-section {
   text-align: center;
-  background-color: #595858;
+  background-color: #fc9953; /* Keeping dark background for hackathon section */
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -79,14 +79,14 @@
 /* Hackathon title styling */
 .hackathon-title {
   font-size: 2rem;
-  color: #06d6a0;
+  color: #e8c2a7; /* Light color for the hackathon title */
   margin-bottom: 1.5rem;
 }
 
 /* Hackathon description styling */
 .hackathon-description {
   font-size: 1rem;
-  color: white;
+  color: white; /* Keeping text color white for visibility */
   line-height: 1.6;
   margin-bottom: 1rem;
 }

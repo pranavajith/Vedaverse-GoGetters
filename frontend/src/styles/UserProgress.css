@@ -22,7 +22,7 @@
 
 .progress-header h3 {
   font-size: 1.8rem;
-  color: #06d6a0;
+  color: #fc9953;
   text-align: center;
   margin-bottom: 1.5rem;
   font-family: "Bebas Neue", sans-serif;
@@ -59,7 +59,7 @@
 
 .progress-item strong {
   font-weight: bold;
-  color: #06d6a0;
+  color: #fc9953;
 }
 
 .progress-item span {
@@ -67,7 +67,7 @@
 }
 
 .bonus-section {
-  background-color: #06d6a0;
+  background-color: #fc9953;
   color: #333;
   border-radius: 8px;
 }

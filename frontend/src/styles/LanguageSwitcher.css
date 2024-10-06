@@ -12,7 +12,7 @@
 }
 
 .language-selector-input {
-  background-color: #06d6a0;
+  background-color: #fc9953;
   border: none;
   color: white;
   padding: 0.8rem 1.5rem;
@@ -31,7 +31,7 @@
 }
 
 .language-selector-input:hover {
-  background-color: #05c08c;
+  background-color: #fc9953;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
 }
 
