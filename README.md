@@ -2,10 +2,8 @@
 
 1. Pranav Ajith
 2. Kancharla Kiranmai
-3. B Niranjan (bn-nb)
-4. Anish Dixit
-5. Ishika Saini
-6. Aditya Abhiram Uppuluri
+3. Anish Dixit
+
 
 # To Setup and Run the Project - Prerequisites
 
@@ -15,7 +13,7 @@
 
 # To Setup and Run the Project - Backend
 
-1. Clone the repo (git clone https://github.com/pranavajith/SIH-Samvidha)
+1. Clone the repo (git clone https://github.com/pranavajith/Vedaverse-GoGetters)
 2. Go to backend folder (cd backend)
 3. Install Go dependencies (go mod tidy)
 4. Run Go Server (go run main.go server.go)
