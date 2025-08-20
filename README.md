@@ -4,6 +4,7 @@
 
 **Team Members**:
 - **Pranav Ajith** - Team Leader (Full Stack)
+- **Yamuna Sethy** - Frontend Developer / API Engineer (Full Stack)
 - **Anish Dixit** - Backend / API Engineer
 - **Kancharla Kiranmai** - UI / UX Expert
 
