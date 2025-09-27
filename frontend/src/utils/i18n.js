@@ -18,6 +18,7 @@ i18n
           Sam: "Ed",
           team: "Meet our team",
           PA: "Pranav Ajith",
+          YS: "Yamuna Sethy",
           IS: "Ishika Saini",
           AAU: "Aditya Uppuluri",
           KK: "Kancharla Kiranmai",

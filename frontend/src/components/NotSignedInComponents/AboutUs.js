@@ -12,7 +12,11 @@ const AboutUs = () => {
       imageUrl: "/team-photo/Pranav.jpeg",
       role: "Team Leader",
     },
-
+    {
+      name: t("YS"),
+      imageUrl: "/team-photo/Yamuna.jpg",
+      role: "Frontend Developer",
+    },
     {
       name: t("KK"),
       imageUrl: "/team-photo/Kiranmai.png",
